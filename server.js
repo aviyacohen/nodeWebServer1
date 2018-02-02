@@ -21,15 +21,25 @@ app.use((req, res, next) => {
     next();
 });
 
+/* Maintensnce Notification.
 app.use((req, res, next) =>{
     res.render("maintenance", {
         pageUrl: req.hostname + req.url
     });
 });
+*/
 
 app.use(express.static(__dirname + "/public"));
 
 hbs.registerHelper("getCurrentYear", () => new Date().getFullYear());
+
+app.get("/", (req, res) => {
+    res.render("regular.hbs", {
+        pageTitle: "Home Page",
+        sectionTitle: "Welcome to this amazing website!",
+        sectionParagraph: "Feel free to check out the different section and enjoy."
+    });
+});
 
 app.get("/about", (req, res) => {
     res.render("regular.hbs", {
@@ -44,6 +54,14 @@ app.get("/branches", (req, res) => {
         pageTitle: "Branches",
         sectionTitle: "This is a section lists the different branches of the company.",
         sectionParagraph: "The user can find branches in various location and look through their info.",
+    });
+});
+
+app.get("/projects", (req, res) => {
+    res.render("projects.hbs", {
+        pageTitle: "Projects",
+        sectionTitle: "Node.js Projects",
+        sectionParagraph: "Here are a few project I have made using node.js",
     });
 });
 
